@@ -192,3 +192,46 @@
             font-family: f, system-ui;
             padding-top: 14px;
         }
+
+        /* 折叠按钮样式 */
+        .toggle-btn {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background: #ffffffcf;
+            backdrop-filter: blur(10px);
+            border-radius: 30px 30px 12px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 21;
+            transition: all 0.2s ease;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .toggle-btn:hover {
+            background: #ffffff;
+            transform: translateX(-50%) scale(1.02);
+        }
+
+        .toggle-text {
+            font-size: 12px;
+            color: #1e293b;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
+        }
+
+        /* 收起状态：面板收起 */
+        .main.collapsed {
+            transform: translateY(calc(100% - 30px));
+        }
+
+        /* 确保 main 有过渡动画 */
+        .main {
+            transition: transform 0.3s ease;
+        }

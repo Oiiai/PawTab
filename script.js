@@ -147,3 +147,19 @@
         
         // 遵循原始style部分字体优雅降级，由于原style.css里面定义@font-face缺失，无需额外引入，避免网络错误。
         // 最终交付干净稳健的html/css/js合并在一个文件，无外部依赖，完美运行。
+
+        // 折叠/展开功能
+        const toggleBtn = document.getElementById('toggleBtn');
+        const mainPanel = document.querySelector('.main');
+        const toggleText = document.querySelector('.toggle-text');
+
+        toggleBtn.addEventListener('click', () => {
+            mainPanel.classList.toggle('collapsed');
+            
+            // 根据状态切换按钮文字
+            if (mainPanel.classList.contains('collapsed')) {
+                toggleText.textContent = 'more';
+            } else {
+                toggleText.textContent = 'less';
+            }
+        });

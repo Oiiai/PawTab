@@ -12,34 +12,34 @@
 
     <!-- 最底层：.img 层，图片占满视口宽高100%，始终位于最底层 -->
     <div class="img-layer">
-        <!-- 使用占位背景图片，原 bg.png 若存在会自动加载，避免404不明显，增加优雅fallback背景渐变 -->
-        <img src="./bg.png" alt="background" id="bgImage" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1920 1080\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%231a2a3a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23ffffffcc\' font-size=\'36\' font-family=\'monospace\'%3Ebg.png not found%3C/text%3E%3C/svg%3E';">
+<!-- 使用占位背景图片，原 bg.png 若存在会自动加载，避免404不明显，增加优雅fallback背景渐变 -->
+<img src="./bg.png" alt="background" id="bgImage" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1920 1080\'%3E%3Crect width=\'100%25\' height=\'100%25\' fill=\'%231a2a3a\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' dominant-baseline=\'middle\' text-anchor=\'middle\' fill=\'%23ffffffcc\' font-size=\'36\' font-family=\'monospace\'%3Ebg.png not found%3C/text%3E%3C/svg%3E';">
     </div>
 
     <!-- 最上层 .main 始终处于页面最上层、最下，宽度占满，背景白色覆盖图片部分 -->
     <div class="main">
-        <div class="toggle-btn" id="toggleBtn">
-            <span class="toggle-text">less</span>
-        </div>
+<div class="toggle-btn" id="toggleBtn">
+    <span class="toggle-text">less</span>
+</div>
 
-        <div class="main-content">
-            <div class="time-box">
-                <span class="time-show" id="time-show">
-                    00:00:00
-                </span>
-                <span class="tiny-text">
-                    ✦ by lught1y yufeng
-                </span>
-            </div>
+<div class="main-content">
+    <div class="time-box">
+<span class="time-show" id="time-show">
+    00:00:00
+</span>
+<span class="tiny-text">
+    ✦ by lught1y yufeng
+</span>
+    </div>
 
-            <div class="search-box">
-                <input type="text" class="search-input" id="search-input" placeholder="Search the web or enter a keyword..." autocomplete="off">
-                <button class="search-button" id="search-button">Search</button>
-            </div>
-            <div class="footer-credit">
-                可是我觉得福瑞很可爱啊 --yufeng 2026.3.20
-            </div>
-        </div>
+    <div class="search-box">
+<input type="text" class="search-input" id="search-input" placeholder="Search the web or enter a keyword..." autocomplete="off">
+<button class="search-button" id="search-button">Search</button>
+    </div>
+    <div class="footer-credit">
+可是我觉得福瑞很可爱啊 --yufeng 2026.3.20
+    </div>
+</div>
     </div>
 
     <script src="./script.js"></script>

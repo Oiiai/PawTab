@@ -1,237 +1,237 @@
-        @font-face {
-            font-family: f;
-            src: url(./font.ttf);
-        }
+@font-face {
+    font-family: f;
+    src: url(./font.ttf);
+}
 
-        /* ---------- RESET & 基础 ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            user-select: none; /* 轻微提升视觉整洁，不影响输入 */
-        }
+/* ---------- RESET & 基础 ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none; /* 轻微提升视觉整洁，不影响输入 */
+}
 
-        /* 全局容器：占满视口，且作为相对定位参考系，确保两层精确堆叠 */
-        html, body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;   /* 防止滚动条破坏满铺效果 */
-            background: #000;   /* 后备背景，但图片会覆盖 */
-        }
+/* 全局容器：占满视口，且作为相对定位参考系，确保两层精确堆叠 */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;   /* 防止滚动条破坏满铺效果 */
+    background: #000;   /* 后备背景，但图片会覆盖 */
+}
 
-        /* 最底层：.img (背景图片层) —— 永远位于底层，宽高100% */
-        .img-layer {
-            position: fixed;     /* 脱离文档流，相对于视口定位，确保覆盖满屏且不受滚动影响 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;         /* 底层 */
-            overflow: hidden;
-        }
+/* 最底层：.img (背景图片层) —— 永远位于底层，宽高100% */
+.img-layer {
+    position: fixed;     /* 脱离文档流，相对于视口定位，确保覆盖满屏且不受滚动影响 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 底层 */
+    overflow: hidden;
+}
 
-        .img-layer img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;   /* 保证图片比例覆盖整个区域，不留白边，类似 background-size: cover */
-            display: block;
-            pointer-events: none; /* 让图片不干扰点击事件，点击穿透到底层，但.main可点 */
-        }
+.img-layer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* 保证图片比例覆盖整个区域，不留白边，类似 background-size: cover */
+    display: block;
+    pointer-events: none; /* 让图片不干扰点击事件，点击穿透到底层，但.main可点 */
+}
 
-        /* 最上层 .main —— 始终位于页面最上层、最下（底部悬浮），宽度占满，背景纯白，覆盖住图片对应区域 */
-        /* 需求: “始终处于页面最上层、最下，宽度占满，背景为白色，覆盖住 .img 的部分”
-           解读: 白色卡片/面板固定在底部，覆盖图片底部区域，且位于整个页面的最上层(z-index更高)，
-           同时确保宽度100%，背景白色，底部贴合。并且“最下”指贴近页面底部边缘。 
-           额外考虑: 为了让界面优雅，添加内边距和圆角微调，但严格满足占满宽度、白色背景、覆盖图片下层区域。
-        */
-        .main {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #ffffffcf;    /* 纯白背景完全覆盖下层图片 */
-            backdrop-filter: blur(10px);
-            z-index: 20;                  /* 远高于底层图片，保证在最上层 */
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08); /* 轻微阴影增加层次，但不影响覆盖需求 */
-            padding: 20px 20px 15px;      /* 舒适内边距，确保内容不贴边 */
-            /* 保证即使内容很少，底部视觉也完整 */
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            transition: all 0.2s ease;
-            /* 增加与边缘的适应 */
-            box-sizing: border-box;
-        }
+/* 最上层 .main —— 始终位于页面最上层、最下（底部悬浮），宽度占满，背景纯白，覆盖住图片对应区域 */
+/* 需求: “始终处于页面最上层、最下，宽度占满，背景为白色，覆盖住 .img 的部分”
+   解读: 白色卡片/面板固定在底部，覆盖图片底部区域，且位于整个页面的最上层(z-index更高)，
+   同时确保宽度100%，背景白色，底部贴合。并且“最下”指贴近页面底部边缘。 
+   额外考虑: 为了让界面优雅，添加内边距和圆角微调，但严格满足占满宽度、白色背景、覆盖图片下层区域。
+*/
+.main {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffffcf;    /* 纯白背景完全覆盖下层图片 */
+    backdrop-filter: blur(10px);
+    z-index: 20;  /* 远高于底层图片，保证在最上层 */
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08); /* 轻微阴影增加层次，但不影响覆盖需求 */
+    padding: 20px 20px 15px;      /* 舒适内边距，确保内容不贴边 */
+    /* 保证即使内容很少，底部视觉也完整 */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    transition: all 0.2s ease;
+    /* 增加与边缘的适应 */
+    box-sizing: border-box;
+}
 
-        /* 内部内容容器——用于控制最大宽度及居中对齐，但父级宽度已经是100%白色背景 */
-        .main-content {
-            max-width: 680px;
-            margin: 0 auto;
-            width: 100%;
-        }
+/* 内部内容容器——用于控制最大宽度及居中对齐，但父级宽度已经是100%白色背景 */
+.main-content {
+    max-width: 680px;
+    margin: 0 auto;
+    width: 100%;
+}
 
-        /* 时间展示区 */
-        .time-box {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            row-gap: 8px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-            padding-bottom: 16px;
-        }
+/* 时间展示区 */
+.time-box {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding-bottom: 16px;
+}
 
-        .time-show {
-            font-weight: 700;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            font-family: f, system-ui, 'Segoe UI', 'Monaco', 'Courier New', monospace;
-            background: linear-gradient(135deg, #1e1e2f, #2a2a3a);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            /* 添加时髦渐变，但依然是白底上层可见，不影响覆盖需求 */
-        }
+.time-show {
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    font-family: f, system-ui, 'Segoe UI', 'Monaco', 'Courier New', monospace;
+    background: linear-gradient(135deg, #1e1e2f, #2a2a3a);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    /* 添加时髦渐变，但依然是白底上层可见，不影响覆盖需求 */
+}
 
-        /* 为了阅读性，如果喜欢深色文字也完全符合白色背景 */
-        .tiny-text {
-            font-size: 0.8rem;
-            color: #6c6c7c;
-            font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
-        }
+/* 为了阅读性，如果喜欢深色文字也完全符合白色背景 */
+.tiny-text {
+    font-size: 0.8rem;
+    color: #6c6c7c;
+    font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
 
-        /* 搜索框区域布局 */
-        .search-box {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            background: #f8f9fc;
-            border-radius: 48px;
-            padding: 4px 4px 4px 20px;
-            transition: all 0.2s;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-        }
+/* 搜索框区域布局 */
+.search-box {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background: #f8f9fc;
+    border-radius: 48px;
+    padding: 4px 4px 4px 20px;
+    transition: all 0.2s;
+    border: 1px solid #eef2f6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
 
-        .search-box:focus-within {
-            border-color: #b3c7ff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            background: #ffffff;
-        }
+.search-box:focus-within {
+    border-color: #b3c7ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: #ffffff;
+}
 
-        .search-input {
-            flex: 1;
-            border: none;
-            background: transparent;
-            font-size: 1rem;
-            padding: 14px 0;
-            outline: none;
-            font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
-            color: #1e293b;
-        }
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    padding: 14px 0;
+    outline: none;
+    font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: #1e293b;
+}
 
-        .search-input::placeholder {
-            color: #94a3b8;
-            font-weight: 400;
-        }
+.search-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
 
-        .search-button {
-            background: #000000;
-            border: none;
-            color: white;
-            font-weight: 500;
-            padding: 15px 25px;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-            font-family: f, inherit;
-            letter-spacing: 0.3px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
+.search-button {
+    background: #000000;
+    border: none;
+    color: white;
+    font-weight: 500;
+    padding: 15px 25px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: f, inherit;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
 
-        .search-button:hover {
-            background: #2c2c3a;
-            transform: scale(0.97);
-        }
+.search-button:hover {
+    background: #2c2c3a;
+    transform: scale(0.97);
+}
 
-        .search-button:active {
-            background: #111;
-        }
+.search-button:active {
+    background: #111;
+}
 
-        /* 可选：添加一个优雅的遮罩微调体验，但不是必须；白色底部卡片覆盖图片底部区域完全满足需求 */
-        /* 调整移动端适配：确保在窄屏幕下方内边距适中 */
-        @media (max-width: 560px) {
-            .main {
-                padding: 16px 20px 24px;
-            }
-            .time-show {
-                font-size: 1.9rem;
-            }
-            .search-button {
-                padding: 6px 16px;
-            }
-            .tiny-text {
-                font-size: 0.7rem;
-            }
-        }
+/* 可选：添加一个优雅的遮罩微调体验，但不是必须；白色底部卡片覆盖图片底部区域完全满足需求 */
+/* 调整移动端适配：确保在窄屏幕下方内边距适中 */
+@media (max-width: 560px) {
+    .main {
+padding: 16px 20px 24px;
+    }
+    .time-show {
+font-size: 1.9rem;
+    }
+    .search-button {
+padding: 6px 16px;
+    }
+    .tiny-text {
+font-size: 0.7rem;
+    }
+}
 
-        /* 确保任何极端尺寸下，背景层图片始终完全覆盖，不露出黑边 */
-        @media (max-aspect-ratio: 3/4) {
-            .img-layer img {
-                object-fit: cover;
-            }
-        }
+/* 确保任何极端尺寸下，背景层图片始终完全覆盖，不露出黑边 */
+@media (max-aspect-ratio: 3/4) {
+    .img-layer img {
+object-fit: cover;
+    }
+}
 
-        /* 增强可访问性，让内容更舒适 */
-        .footer-credit {
-            margin-top: 1px;
-            text-align: center;
-            font-size: 0.7rem;
-            color: #a0a0b0;
-            font-family: f, system-ui;
-            padding-top: 14px;
-        }
+/* 增强可访问性，让内容更舒适 */
+.footer-credit {
+    margin-top: 1px;
+    text-align: center;
+    font-size: 0.7rem;
+    color: #a0a0b0;
+    font-family: f, system-ui;
+    padding-top: 14px;
+}
 
-        /* 折叠按钮样式 */
-        .toggle-btn {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 30px;
-            background: #ffffffcf;
-            backdrop-filter: blur(10px);
-            border-radius: 30px 30px 12px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 21;
-            transition: all 0.2s ease;
-            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
-        }
+/* 折叠按钮样式 */
+.toggle-btn {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 30px;
+    background: #ffffffcf;
+    backdrop-filter: blur(10px);
+    border-radius: 30px 30px 12px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 21;
+    transition: all 0.2s ease;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+}
 
-        .toggle-btn:hover {
-            background: #ffffff;
-            transform: translateX(-50%) scale(1.02);
-        }
+.toggle-btn:hover {
+    background: #ffffff;
+    transform: translateX(-50%) scale(1.02);
+}
 
-        .toggle-text {
-            font-size: 12px;
-            color: #1e293b;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
-        }
+.toggle-text {
+    font-size: 12px;
+    color: #1e293b;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    font-family: f, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
 
-        /* 收起状态：面板收起 */
-        .main.collapsed {
-            transform: translateY(calc(100% - 30px));
-        }
+/* 收起状态：面板收起 */
+.main.collapsed {
+    transform: translateY(calc(100% - 30px));
+}
 
-        /* 确保 main 有过渡动画 */
-        .main {
-            transition: transform 0.3s ease;
-        }
+/* 确保 main 有过渡动画 */
+.main {
+    transition: transform 0.3s ease;
+}
